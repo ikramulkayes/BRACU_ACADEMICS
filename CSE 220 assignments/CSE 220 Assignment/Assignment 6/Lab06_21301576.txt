@@ -1,0 +1,208 @@
+Task 1(a)--------------->
+
+def facto(n):  #task 1a
+  if n ==0:
+    return n
+  elif n==1:
+    return 1
+  else:
+    return n*facto(n-1)
+
+print(facto(5))
+
+
+________________________________
+
+Task 1(b)--------------->
+
+def fibonachiN(n):  #task 1b
+  if n==0:
+    return 1
+  elif n == 1:
+    return 1
+  else:
+    return fibonachiN(n-1)+fibonachiN(n-2)
+
+print(fibonachiN(5))
+
+________________________________
+Task 1(c)--------------->
+
+def func(lst,n=0):#task 1c
+  if n == len(lst)-1:
+    print(lst[n])
+  else:
+    print(str(lst[n])+", ",end="")
+    
+    return func(lst,n+1)
+
+func([1,2,3,4,5,6])
+
+________________________________
+Task 1(d)--------------->
+
+def powerN(a,b):  #task 1d
+  if b == 1 or b==0:
+    return a
+  else:
+    
+    return a*powerN(a,b-1)
+print(powerN(3,3))
+
+
+
+________________________________
+Task 2(a)--------------->
+
+def decimal_to_binary(num): #task 2a
+  if num ==1:
+    print("1",end="")
+  elif num ==0:
+    
+    print("0")
+    
+  else:
+    if num % 2 ==0:
+      decimal_to_binary(num//2)
+      print("0",end="")
+    else:
+      decimal_to_binary(num//2)
+      print("1",end="")
+
+decimal_to_binary(11111)
+
+
+________________________________
+Task 2(b)--------------->
+
+class Node: #task 2b
+    def __init__(self,elm,next):
+        self.elm = elm
+        self.next = next
+
+def sum_nodes(head):
+    if head.next == None:
+        return head.elm
+    else:
+        return head.elm + sum_nodes(head.next)
+
+lst = [1,2,3,4,5,6]
+head = Node(lst[0], None)
+obj = head
+
+for elm in range(1, len(lst)): #creating linked list
+    temp = Node(lst[elm], None)
+    obj.next = temp
+    obj = temp
+
+print(sum_nodes(head))
+
+
+________________________________
+Task 2(c)--------------->
+
+class Node: #task 2c
+    def __init__(self,val,next):
+        self.val = val
+        self.next = next
+
+lst = [10,20,30,40]
+obj = Node(lst[0], None)
+head = obj
+for elm in range(1,len(lst)):
+    k = Node(lst[elm], None)
+    obj.next = k
+    obj = k
+
+def reverse_print(head):
+    if head.next == None:
+        print(head.val)
+    else:
+        reverse_print(head.next)
+        print(head.val)
+
+
+reverse_print(head)
+
+
+
+________________________________
+Task 3--------------->
+
+def hocBuilder(height):  #task3
+    if height ==0:
+        return 0
+    elif height ==1:
+        return 8
+    else:
+        return 5 + hocBuilder(height-1)
+
+print(hocBuilder(3))
+
+
+________________________________
+Task 4(a)--------------->
+
+def print_lefty(num): #task 4a
+    num = str(num)
+    if num =="0":
+        
+        return ""
+    else:
+        k = print_lefty(int(num)-1)+num 
+        print(k)
+        return k
+print_lefty(5) 
+
+
+
+________________________________
+Task 4(b)--------------->
+
+def print_righty(num,count=0): #task 4b
+    num = str(num)
+    
+    if num =="0":
+        
+        return ""
+    else:
+        count += 1
+        k = print_righty(int(num)-1,count)+num 
+        print(" "*(count-1)+str(k))
+        return k
+print_righty(5)  
+
+
+_________________________________________________
+Task 5--------------->
+
+class FinalQ:
+    def print(self,lst,n=0):
+        
+        gg =  self.profit(lst[n])
+        print(f"{n+1}.Investment: {lst[n]} Profit: {gg}")
+        n += 1
+        if n <= (len(lst)-1):
+            self.print(lst,n)
+
+
+        
+            
+
+
+    
+    def profit(self,capital):
+        if capital <= 25000:
+            return 0.0
+        elif capital <= 100000:
+            return 45.0 + self.profit(capital-1000)
+        elif capital > 100000:
+            return 80.0 + self.profit(capital - 1000)
+        else:
+            return 0.0
+
+
+
+lst =[25000, 100000, 250000, 350000]       
+s = FinalQ()
+s.print(lst,0)

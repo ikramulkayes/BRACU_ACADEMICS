@@ -1,0 +1,235 @@
+Task 1: ------------------------------------------------->
+
+#Task1
+def shiftLeft(lst,k):
+  lenlst = len(lst)
+  for elm in range(0,len(lst)):
+    if elm < (lenlst-k):
+      lst[elm] = lst[elm+k]
+    else:
+      lst[elm] = 0
+ 
+
+  
+  return lst
+
+print(shiftLeft([10,20,30,40,50,60],1))
+
+
+Task 2: ------------------------------------->
+
+Ans:
+#Task2
+def rotateLeft(lst,k):
+    
+    for k in range(k):
+        temp = lst[0]
+        for elm in range(len(lst)-1):
+            lst[elm] = lst[elm+1]
+        lst[elm+1] = temp
+    return lst
+
+print(rotateLeft([10,20,30,40,50,60],11))
+
+
+
+
+Task 3:------------------------------------------------->
+Ans:
+#Task 3
+def shiftRight(lst,k):
+  lenlst = len(lst)
+  for belm in range(k):
+    temp = lst[0]
+    lst[0] = 0
+    
+    for elm in range(1,len(lst)):
+      ftemp = lst[elm]
+      lst[elm] = temp
+      temp = ftemp
+  return lst
+print(shiftRight([10,20,30,40,50,60],4))
+
+
+
+Task 4: --------------------------------------------->
+Ans:
+#Task 4
+def rotateRight(lst,k):
+  lenlst = len(lst)
+  for belm in range(k):
+    temp = lst[-1]
+    ktemp = lst[0]
+
+    
+
+    for elm in range(1,len(lst)):
+      kktemp = lst[elm]
+      lst[elm] = ktemp
+      ktemp = kktemp
+
+    lst[0] = temp
+  return lst 
+print(rotateRight([10,20,30,40,50,60],3))
+
+Task 5: ------------------------------------------------>
+Ans:
+#Task 5
+def remove(lst,size,idx):
+
+    if idx <0 or idx>=size:
+        return "Get a valid index"
+    while idx < size-1:
+        
+        lst[idx] = lst[idx+1]
+        idx += 1
+    lst[idx] = 0
+    return lst
+
+lst = [10,20,30,40,50,80,77]
+print(remove(lst, 7,1))
+
+
+Task 6: ------------------------------------------------>
+Ans:
+
+
+#Task 6
+def removeAll(lst,size,value):
+
+    idx = 0
+    while idx < size:
+        if lst[idx] == value:
+            i = idx
+            while i < size-1:
+                lst[i] = lst[i+1]
+                i += 1
+            lst[i] = 0
+            lst[size-1] = 0
+            size -= 1
+        else:
+            idx += 1
+    return lst
+
+source=[2,2,10,2,30,2,2,50,2,2,2,2]
+print(removeAll(source,12,2))
+
+
+Task 7: ----------------------------------------------->
+Ans:
+
+#Task 7
+def splittingArray(lst):
+    
+    
+    for belm in range(1,len(lst)):
+        sum1 = 0
+        sum2 = 0
+        for elm in range(belm):
+            
+            sum1 += lst[elm]
+        
+        for elm in range(belm,len(lst)):
+            
+            sum2 += lst[elm]
+        
+        if sum1 == sum2:
+            return "true"
+    return "false"
+
+lst = [10, 3, 1, 2, 10]
+print(splittingArray(lst))
+
+Task 8: ------------------------------------------------------->
+Ans:
+#Task 8
+def arraySeries(n):
+    lst = [0]*(n*n)
+    count = 0
+    stepcount = n-1
+
+    for i in range(1,n+1):
+        for elm in range(i):
+            lst[stepcount-elm] = elm+1
+        stepcount+= n
+    return lst
+
+print(arraySeries(10))
+
+Task 9: -------------------------------------->
+Ans:
+
+#Task 9
+def maxBunchcount(lst):
+    maxcount = None
+    count = None
+    prev= None
+    for elm in range(len(lst)):
+        if prev == None and maxcount==None:
+            prev = lst[elm]
+            count = 1
+            maxcount = 1
+        elif lst[elm] == prev:
+            #print(lst[elm])
+            count += 1
+            if count > maxcount:
+                #print(lst[elm])
+                #print(count)
+                maxcount = count
+        else:
+            prev = lst[elm]
+            count = 1
+    return maxcount
+
+lst = [1,1,1,1,1,1, 2, 2, 3,3,4, 4, 4, 4,3,3,3,3,3]
+print(maxBunchcount(lst))
+
+
+Task 10: ------------------------------------------------------->
+
+Ans:
+#Task 10
+def doubleRepeat(lst):
+    rlst = [None]*len(lst)
+    rlstcount = 0
+    countlst = [None]*len(lst)
+    countlstcount = 0
+    #flag = True
+    for elm in lst:
+        flag=True
+        if len(rlst)==0:
+            rlst[0] = elm
+            rlstcount+= 1
+        else:
+            for selm in rlst:
+                if selm == elm:
+                    flag = False
+                    pass
+            if flag == True:
+                rlst[rlstcount] = elm
+                rlstcount+=1
+        if flag:
+            count = 0
+            for kelm in lst:
+                if elm == kelm:
+                    count+= 1
+            
+            countlst[countlstcount] = count
+            countlstcount +=1
+    #print(rlst)
+    #print(countlst)
+    checklst = [0]*len(lst)
+    count = 0
+    for elm in countlst:
+        for selm in checklst:
+            if elm != None:
+                if elm >1 and elm==selm:
+                    #print(elm)
+                    return True
+        checklst[count] = elm
+        count+= 1
+    return False
+
+lst = [3,4,6,3,4,7,4,6,8,6,6,4]
+print(doubleRepeat(lst))
+

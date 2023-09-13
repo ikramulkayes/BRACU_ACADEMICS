@@ -1,0 +1,116 @@
+
+Task 1 on Key index Searching & Sorting------------------------------------->
+
+class KeyIndex:
+  def __init__(self,lst):
+    self.length = len(lst)
+    flag = True
+    for elm in lst:
+
+      if elm <0:
+        flag = False
+        break
+    self.flag = flag
+    if flag:
+      maxnum = lst[0]
+      for elm in lst:
+        if maxnum < elm:
+          maxnum = elm
+      
+      self.auxarray = [0]*(maxnum+1)
+      for elm in lst:
+        self.auxarray[elm]+= 1
+      print(self.auxarray)
+    else:
+      minnum = lst[0]
+      
+      for elm in lst:
+        if elm < minnum:
+          minnum = elm
+      self.minnum = minnum
+      maxnum = None
+      for elm in range(len(lst)):
+        lst[elm] = lst[elm] - minnum
+        if maxnum == None:
+          maxnum = lst[elm]
+        elif lst[elm] > maxnum:
+          maxnum = lst[elm]
+      self.auxarray = [0]*(maxnum+1)
+      for elm in lst:
+        self.auxarray[elm]+= 1
+      #print(self.auxarray)
+
+  def search(self,elm):
+    if self.flag == False:
+      elm = elm - self.minnum
+    if elm <len(self.auxarray):
+      count = 0
+      k = self.auxarray[elm]
+      if k ==0:
+        return False
+      else:
+        return True
+    else:
+      return False
+
+  def sort(self):
+    lst = [0]*self.length
+    count = 0
+    for i in range(len(self.auxarray)):
+      elm = self.auxarray[i]
+      for j in range(elm):
+        lst[count] = i + self.minnum
+        count += 1
+    return lst
+
+
+lst = [-9,6,12,5,6,12,-1]
+
+s = KeyIndex(lst)
+print(s.search(5))
+print(s.sort())
+
+----------------------------------------------------------------
+
+Task 2 on Hashing----------------------------------->
+
+class hash:
+  def __init__(self,lst):
+    self.lst = lst
+    self.flst = [0]*9
+    for word in lst:
+      numsum = 0
+      consonantsum = 0
+      for elm in word:
+        if ord(elm)>=48 and ord(elm)<=57:
+          numsum += int(elm)
+        elif ord(elm)>=65 and ord(elm)<=90:
+          
+          if elm != "A" and elm != "E" and elm !="I" and elm != "O" and elm != "U":
+            consonantsum += 1
+        elif ord(elm)>=97 and ord(elm)<=122:
+          
+          if elm != "a" and elm != "e" and elm !="i" and elm != "o" and elm != "u":
+            consonantsum += 1
+      val = ((consonantsum*24)+numsum)%9
+      count = val
+      while self.flst[count] != 0:
+        count += 1
+        count = count %9
+      self.flst[count] = word
+    print(self.flst)
+
+
+
+
+
+
+
+
+
+
+
+
+
+lst = ["ST1E89B8A32","ST1E89B8A32","KI1E89B8A52"]
+k = hash(lst)
